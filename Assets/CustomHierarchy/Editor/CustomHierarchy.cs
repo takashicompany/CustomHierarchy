@@ -159,7 +159,7 @@ public class CustomHierarchyWindow : EditorWindow{
 
 	private int _index;
 
-	[MenuItem("Window/CustomHierarchyCommandWindow #4")]
+	[MenuItem("Window/CustomHierarchy #4")]
 	static void Init () {
 		CustomHierarchyWindow window = (CustomHierarchyWindow)EditorWindow.GetWindow<CustomHierarchyWindow>();
 	}
