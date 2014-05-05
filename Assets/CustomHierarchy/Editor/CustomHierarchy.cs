@@ -1,17 +1,48 @@
-﻿using UnityEditor;
+﻿// @takashicompany (takashicompany.com)
+// CustomHierarchy var1.0.1
+
+using UnityEditor;
 using UnityEngine;
 
 using System;
 using System.Reflection;
 using System.Collections.Generic;
 
+/// <summary>
+/// HierarchyViewを拡張するクラス
+/// 専用のウィンドウ(Shift + 4)に「HogeClass.FugaVal」といった指定をすると
+/// HogeClassのFugaValの値をHierarchyに表示する
+/// </summary>
 [InitializeOnLoad]
 public class CustomHierarchy
 {
+	private const string KEY_CLASS_NAME = "tc_customhierarchy_class_name";
+	private const string KEY_FIELD_NAME = "tc_customhierarchu_field_name";
+
+	public static string className
+	{
+		get
+		{
+			return EditorPrefs.GetString(KEY_CLASS_NAME);
+		}
+		set
+		{
+			EditorPrefs.SetString(KEY_CLASS_NAME, value);
+		}
+	}
 
 
-	public static string className;
-	public static string fieldName;
+	public static string fieldName
+	{
+		get
+		{
+			return EditorPrefs.GetString(KEY_FIELD_NAME);
+		}
+		set
+		{
+			EditorPrefs.SetString(KEY_FIELD_NAME, value);
+		}
+	}
 
 	static CustomHierarchy ()
 	{
@@ -119,7 +150,7 @@ public class CustomHierarchy
 
 
 
-public class CustomHierarchyCommandWindow : EditorWindow{
+public class CustomHierarchyWindow : EditorWindow{
 
 	private string _userInput;
 
@@ -130,7 +161,7 @@ public class CustomHierarchyCommandWindow : EditorWindow{
 
 	[MenuItem("Window/CustomHierarchyCommandWindow #4")]
 	static void Init () {
-		CustomHierarchyCommandWindow window = (CustomHierarchyCommandWindow)EditorWindow.GetWindow<CustomHierarchyCommandWindow>();
+		CustomHierarchyWindow window = (CustomHierarchyWindow)EditorWindow.GetWindow<CustomHierarchyWindow>();
 	}
 
 	void OnGUI ()
